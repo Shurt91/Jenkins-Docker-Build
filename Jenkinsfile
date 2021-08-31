@@ -18,7 +18,7 @@ pipeline {
     stages {
         stage('Run image') {
             steps {
-                sh 'curl localhost'
+                sh 'cat /etc/nginx/conf.d/default.conf'
             }
         }
     }
