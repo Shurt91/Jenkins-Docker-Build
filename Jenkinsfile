@@ -7,10 +7,17 @@ node{
     stage('Build image') {
         app = docker.build("shurt/nginx")
     }
-    stage('Run image') {
-        docker.image('shurt/nginx').withRun('-p 80:80 --name nginx') { c ->
-        sh 'docker ps'
-        sh 'docker exec nginx curl localhost'
+    agent {
+        docker {
+            image 'shurt:latest'
+            args '-p 80:80'
+        }
     }
+     stages {
+        stage('Run image') {
+            steps {
+                sh 'curl localhost'
+            }
+        }
     }
 }
