@@ -7,13 +7,15 @@ node{
     stage('Build image') {
         app = docker.build("shurt/nginx")
     }
+}
+pipeline {
     agent {
         docker {
             image 'shurt/nginx:lastest'
             args '-p 80:80'
         }
     }
-     stages {
+    stages {
         stage('Run image') {
             steps {
                 sh 'curl localhost'
