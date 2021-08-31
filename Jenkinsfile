@@ -11,7 +11,7 @@ node{
 pipeline {
     agent {
         docker {
-            image 'shurt/nginx:lastest'
+            image 'shurt/nginx:latest'
             args '-p 80:80'
         }
     }
