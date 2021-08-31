@@ -9,7 +9,7 @@ node{
     }
     agent {
         docker {
-            image 'shurt:shurt'
+            image 'shurt/nginx:lastest'
             args '-p 80:80'
         }
     }
