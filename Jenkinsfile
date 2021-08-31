@@ -7,19 +7,10 @@ node{
     stage('Build image') {
         app = docker.build("shurt/nginx")
     }
-}
-pipeline {
-    agent {
-        docker {
-            image 'shurt/nginx:latest'
-            args '-p 80:80'
-        }
+    stage('Run image') {
+        docker.image('shurt/nginx').withRun('-p 80:80 --name nginx') { c ->
+        sh 'docker ps'
+        sh 'docker exec nginx curl localhost'
     }
-    stages {
-        stage('Run image') {
-            steps {
-                sh 'cat /etc/nginx/conf.d/default.conf'
-            }
-        }
     }
 }
